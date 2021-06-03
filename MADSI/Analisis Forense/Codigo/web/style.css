@@ -1,0 +1,47 @@
+*{
+    padding: none;
+    margin: none;
+    border: none;
+    background-color: #F2F2F2;
+}
+
+h1{
+    color: #F22E62;
+}
+
+#ruta{
+    padding-left: 10px;
+    font-size: 15px;
+    color: #F2F2F2;
+    background-color: #F25781;
+    width: 400px;
+    height: 30px;
+
+    transition: .2s;
+}
+
+#ruta:hover{
+    color: #F2F2F2;
+    background-color: #F28DA8;
+    width: 405px;
+    height: 35px;
+}
+
+#btnEnviar{
+    margin: relative;
+    font-size: 15px;
+    color: #F2F2F2;
+    background-color: #F25781;
+    width: 150px;
+    height: 30px;
+
+    transition: .2s;
+}
+
+#btnEnviar:hover{
+    cursor: pointer;
+    color: #F2F2F2;
+    background-color: #F28DA8;
+    width: 155px;
+    height: 35px;
+}

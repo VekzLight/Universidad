@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>1030</x>
+      <y>340</y>
+      <w>240</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>models
+--
+   + Ataque
+   + RegistroLOG
+   + RegistroDatos
+valign=center
+halign=left
+fg=#8E53F0</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLHierarchy</id>
+    <coordinates>
+      <x>0</x>
+      <y>180</y>
+      <w>290</w>
+      <h>310</h>
+    </coordinates>
+    <panel_attributes>type=Package
+fg=#5A6BD6
+uam
+	azc
+		madsi
+			af
+				frames
+				io
+				managers
+				models
+				test</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>310</x>
+      <y>190</y>
+      <w>240</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>frames
+--
+   + IPrincipal
+   + IEstadisticas
+valign=center
+halign=left
+fg=#3FB6D6</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>670</x>
+      <y>190</y>
+      <w>240</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>managers
+--
+   + AnalizadorDeAtaques
+   + CambiarVentanas
+   + AnalizadorDatos
+   + AdministradorDeRegistros
+   + Visualizador
+   + AdministradorDeVentanas
+valign=center
+halign=left
+fg=#1EC291</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>310</x>
+      <y>340</y>
+      <w>240</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>test
+--
+   + TestOne
+valign=center
+halign=left
+fg=#FA70AE</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>1030</x>
+      <y>190</y>
+      <w>240</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>io
+--
+   + Reader
+valign=center
+halign=left
+fg=#D64D41</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>900</x>
+      <y>240</y>
+      <w>150</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+&lt;&lt;import&gt;&gt;
+fg=#1EC291</panel_attributes>
+    <additional_attributes>10.0;20.0;130.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>900</x>
+      <y>270</y>
+      <w>150</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+&lt;&lt;import&gt;&gt;
+fg=#1EC291</panel_attributes>
+    <additional_attributes>10.0;10.0;40.0;10.0;40.0;120.0;130.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>540</x>
+      <y>240</y>
+      <w>150</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+&lt;&lt;import&gt;&gt;
+fg=#3FB6D6</panel_attributes>
+    <additional_attributes>10.0;20.0;130.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>420</x>
+      <y>310</y>
+      <w>80</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+&lt;&lt;import&gt;&gt;
+fg=#FA70AE</panel_attributes>
+    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>540</x>
+      <y>270</y>
+      <w>510</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+&lt;&lt;import&gt;&gt;
+fg=#3FB6D6</panel_attributes>
+    <additional_attributes>10.0;10.0;80.0;10.0;80.0;140.0;490.0;140.0</additional_attributes>
+  </element>
+</diagram>

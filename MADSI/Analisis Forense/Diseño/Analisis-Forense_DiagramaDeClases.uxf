@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <help_text>Space for diagram notes</help_text>
+  <zoom_level>4</zoom_level>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>272</x>
+      <y>276</y>
+      <w>96</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+fg=#1694D9</panel_attributes>
+    <additional_attributes>10.0;10.0;150.0;10.0;150.0;280.0;220.0;280.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>100</x>
+      <y>356</y>
+      <w>68</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+fg=#D64D41</panel_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0;150.0;10.0;150.0;80.0;120.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>408</x>
+      <y>332</y>
+      <w>12</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+fg=#1694D9</panel_attributes>
+    <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>740</x>
+      <y>400</y>
+      <w>44</w>
+      <h>12</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+fg=#C738AA</panel_attributes>
+    <additional_attributes>10.0;10.0;90.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>212</x>
+      <y>248</y>
+      <w>64</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>RegisterLog
+--
+- date: String
+- server: String
+- protocol: String
+- description: String
+- SysId: int
+--
++ RegisterLog(void)
++ getters(void): Object
++ setters(Object): void
++ toString(void): String
+fg=#D64D41</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>180</x>
+      <y>360</y>
+      <w>116</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>RegisterManager
+--
+- registers: ArrayList&lt;RegisterLog&gt;
+- bufferSize: int
+- section: int
+--
++ loadRegisters(void): void
++ getRegister(index: int): RegisterLog
++ getRegisters(void): ArrayList&lt;RegisterLog&gt;
++ getBufferSize(void): int
++ getSection(void): int
++ setBufferSize(bufferSize: int): void
++ setSection(section: int): void
++ toString(void):String
+fg=#D64D41</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>380</y>
+      <w>148</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>Reader
+--
+_- instance: Reader_
+--
+_+ getInstance(void): Reader_
++ probeFile(route: String): boolean
++ read(route: String): ArrayList&lt;String&gt;
++ read(route: String, begin:int, end:int): ArrayList&lt;String&gt;
+fg=#D64D41</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>388</x>
+      <y>248</y>
+      <w>64</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>RegisterData
+--
+- regDate: Date
+- server: String
+- protocol: String
+- sysId: int
+- ip: String
+- country: String
+- user: String
+- port: int
+--
++ getters(void): Object
++ setters(Object): void
++ toString(void): String
+fg=#1694D9</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>360</x>
+      <y>368</y>
+      <w>148</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>DataAnalyzer
+--
+- registersData: ArrayList&lt;RegisterData&gt;
+- ipCountry: Hashtable&lt;String, String&gt;
+--
++ DataAnalyzer(void)
++ getRegistersData(void): ArrayList&lt;RegisterData&gt;
++ analizeLog(registersLog: ArrayList&lt;RegisterData&gt;): void
++ getIpCountry(ip: String): String
++ getXmlAPI(ip: String): String
++ analyzeDescription(description: String): String[]
++ generateDate(date: String): Date
++ toString(void): String
+fg=#1694D9</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>776</x>
+      <y>284</y>
+      <w>96</w>
+      <h>164</h>
+    </coordinates>
+    <panel_attributes>Attack
+--
+- attackId: int
+- typeAttack: ArrayList&lt;String&gt;
+- begin: int
+- end: int
+--
++ getters()
++ setters()
++ getIPs(void): ArrayList&lt;String&gt;
++ getCountries(void): ArrayList&lt;String&gt;
++ getUsers(void): ArrayList&lt;String&gt;
++ getDates(void): ArrayList&lt;Date&gt;
++ getCountIPs(void): int
++ getCountCountries(void): int
++ getCountUsers(void): int
++ getMostRepeatedIP(void): String
++ getMostRepeatedCountry(void): String
++ getMostRepeatedUser(void): String
++ geCountIP(ip: String): int
++ geCountCountry(country: String): int
++ geCountUser(user: String): int
++ getDurationOfAttack(void): Duration
++ getFrequency(void): float
++ isAnHuman(void): boolean
++ toString(void): String
+fg=#DB3411
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>560</x>
+      <y>304</y>
+      <w>184</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>AttackAnalyzer
+--
+_- instance: AttackAnalyzer_
+- registerData: ArrayList&lt;RegisterData&gt;
+- attacks: ArrayList&lt;Attacks&gt;
+- timeAttacks: long
+- ipsAttacks: int
+- usrAttacks: int
+- attempsAttacks: int
+--
+- AttackAnalizer(void)
+_+ getInstance(void): AttackAnalyzer_
++ getters(void): Object
++ setters(object: Object): void
++ analizeAttacks(void): void
++ getAttacksOfType(type: String): ArrayList&lt;Attacks&gt;
++ generateAttacksReport(begin: int, end: int) ArrayList&lt;Attacks&gt;
++ calculateDiferenceTime(dateNew: Date, dateOld: Date): long
++ filterRepeatedIPs(begin: int, end:int): Hashtable&lt;String, Integer&gt;
++ filterRepeatedIUsers(begin: int, end:int): Hashtable&lt;String, Integer&gt;
++ filterRepeatedCountries(begin: int, end:int): Hashtable&lt;String, Integer&gt;
++ getDatesBetwen(begin: int, end: int): ArrayList&lt;Date&gt;
++ toString(void): toString
+fg=#C738AA</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>144</x>
+      <y>400</y>
+      <w>44</w>
+      <h>12</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+fg=#D64D41</panel_attributes>
+    <additional_attributes>10.0;10.0;90.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>292</x>
+      <y>400</y>
+      <w>76</w>
+      <h>12</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+fg=#1694D9</panel_attributes>
+    <additional_attributes>10.0;10.0;170.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>680</x>
+      <y>276</y>
+      <w>88</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+fg=#C738AA</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0;200.0;10.0;200.0;90.0;170.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>504</x>
+      <y>400</y>
+      <w>64</w>
+      <h>12</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+fg=#C738AA</panel_attributes>
+    <additional_attributes>10.0;10.0;140.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>588</x>
+      <y>472</y>
+      <w>160</w>
+      <h>116</h>
+    </coordinates>
+    <panel_attributes>Visualizer
+--
+--
++ graphicsData(bGraphic: JFreeChart): void
++ graphicAttacksIPType(type: String): void
++ graphicAttacksCountryType(type: String): void
++ graphicAttacksUsersType(type: String): void
++ graphicDiffIPTypeOf(type: String, attackIdRelative: int):void
++ graphicDiffCountryTypeOf(type: String, attackIdRelative: int):void
++ graphicDiffUsersTypeOf(type: String, attackIdRelative: int):void
++ graphicAllIPsType(type: String): void
++ graphicAllCountriesType(type: String): void
++ graphicAllUsersType(type: String): void
++ graphicAllIPs(void): void
++ graphicAllCountries(void): void
++ graphicAllUsers(void): void
++ printGeneralStatistic(void): void
++ initVizualize():void
+fg=#12AE89</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>680</x>
+      <y>444</y>
+      <w>12</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+fg=#12AE89</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>780</x>
+      <y>488</y>
+      <w>40</w>
+      <h>12</h>
+    </coordinates>
+    <panel_attributes>VGraphic
+--
+
+--
+fg=#2972D9</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>744</x>
+      <y>488</y>
+      <w>44</w>
+      <h>12</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+fg=#12AE89</panel_attributes>
+    <additional_attributes>90.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>684</x>
+      <y>444</y>
+      <w>160</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+fg=#12AE89</panel_attributes>
+    <additional_attributes>380.0;10.0;380.0;40.0;10.0;40.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>240</x>
+      <y>316</y>
+      <w>12</w>
+      <h>52</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+fg=#D64D41</panel_attributes>
+    <additional_attributes>10.0;110.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>448</x>
+      <y>276</y>
+      <w>184</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+fg=#C738AA</panel_attributes>
+    <additional_attributes>10.0;10.0;440.0;10.0;440.0;70.0</additional_attributes>
+  </element>
+</diagram>

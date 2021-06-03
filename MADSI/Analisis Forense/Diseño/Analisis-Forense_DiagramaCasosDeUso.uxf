@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>200</x>
+      <y>300</y>
+      <w>320</w>
+      <h>250</h>
+    </coordinates>
+    <panel_attributes>Analisis Forense
+fg=#1694D9</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>220</x>
+      <y>440</y>
+      <w>280</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>Recuperar registros
+de una bitácora de autenticación
+fg=#5A6BD6</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>220</x>
+      <y>340</y>
+      <w>280</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>Reconstruir ataque de autenticación
+fg=#1EC291</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLActor</id>
+    <coordinates>
+      <x>60</x>
+      <y>400</y>
+      <w>60</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>Usuario
+fg=#FA70AE</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>110</x>
+      <y>430</y>
+      <w>130</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>fg=#FA70AE</panel_attributes>
+    <additional_attributes>10.0;10.0;110.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>110</x>
+      <y>370</y>
+      <w>130</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>fg=#FA70AE</panel_attributes>
+    <additional_attributes>10.0;70.0;110.0;10.0</additional_attributes>
+  </element>
+</diagram>
