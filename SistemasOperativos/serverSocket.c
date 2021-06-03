@@ -45,7 +45,7 @@ int main(int argc, char ** argv){
 }
 
 
-
+// Crea e inicia el socket servidor
 void socketServer(char _ip[], int _port, int _backlog, char _route[]){
 
     int fdSocket, fdConnection;                     // File Descriptors
@@ -118,7 +118,7 @@ void socketServer(char _ip[], int _port, int _backlog, char _route[]){
 
 
 
-
+// Crea el archivo en la carpeta del servidor
 void crearArchivo(int fdConnection, char* routeRoot){
     int _len;
     FILE *fdFile;
@@ -131,14 +131,15 @@ void crearArchivo(int fdConnection, char* routeRoot){
     printf("[SERVIDOR-hijo]: Ruta obtenida. %s\n", route);
     write(fdConnection, "Recibido", BUFF_SIZE);
 
+    // Rutas temporales
     char _tempRouteDir[BUFF_SIZE];
     strcpy(_tempRouteDir,routeRoot);
     strcat(_tempRouteDir,route);
 
+    // Distingue en tre archivo y directorio
     int contador = 0;
     while( route[contador] != 0 ) contador++;
     contador--;
-    printf("%c", route[contador]);
     if(route[contador] == '/'){
         printf("[SERVIDOR-hijo]: Es un directorio.\n");
         DIR *dirFD = opendir(_tempRouteDir);
@@ -151,8 +152,10 @@ void crearArchivo(int fdConnection, char* routeRoot){
         printf("[SERVIDOR-hijo]: Es un archivo.\n");
         fdFile = fopen(_tempRouteDir, "wb");
         if(fdFile == NULL){
+            // No existe el directorio donde se quiere crear el archivo
             fprintf(stderr, "[SERVIDOR-error]: No existe el directorio. %d: %s \n", errno, strerror(errno));
 
+            // Intenta crear el directorio faltante
             int index = 0;
             int indexcut = 0;
             char routeCut[BUFF_SIZE] = {0};
@@ -171,27 +174,41 @@ void crearArchivo(int fdConnection, char* routeRoot){
             }
             crearDirectorio(routeRoot, routeRelative);
 
+            // Intenta crear nuevamente el archivo
             fdFile = fopen(_tempRouteDir, "wb");
             if(fdFile == NULL){
                 fprintf(stderr, "[SERVIDOR-error]: No se pudo crear el directorio. %d: %s \n", errno, strerror(errno));
                 fclose(fdFile);
                 exit(-1);
             }
-        } else {
-            fdFile = fopen(_tempRouteDir, "wb");
-            if(fdFile == NULL){
-                fprintf(stderr, "[SERVIDOR-error]: No se pudo crear el directorio. %d: %s \n", errno, strerror(errno));
-                fclose(fdFile);
-                exit(-1);
+
+            // Inicia la tranferencia del archivo
+            while((_len=recv(fdConnection, _buffer, BUFF_SIZE,0))!=0) {
+                fwrite(_buffer, sizeof(_buffer), 1, fdFile);
+                printf("[RECIBIDO]: %s\n", _buffer);
+                bzero(_buffer, BUFF_SIZE);
             }
+            printf("[SERVIDOR]: Tranferencia finalizada\n");
             fclose(fdFile);
+            exit(-1);
+        } else {
+
+            // Inicia la transferencia del archivo
+            while((_len=recv(fdConnection, _buffer, BUFF_SIZE,0) != 0)) {
+                fwrite(_buffer, sizeof(_buffer), 1, fdFile);
+                printf("[RECIBIDO]: %s\n", _buffer);
+                bzero(_buffer, BUFF_SIZE);
+            }
+            printf("[SERVIDOR]: Transferencia finalizada\n");
+            fclose(fdFile);
+            exit(-1);
         }
     }
 }
 
 
 
-
+// Crea la ruta especificada
 void crearDirectorio(char *routeRoot, char *route){
     char _routeTemp[BUFF_SIZE];
     char delim[2] = "/";

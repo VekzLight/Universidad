@@ -32,14 +32,14 @@ void clientSocket(char *_ip, int _port, char *_routeRoot, char *name, int fdDire
 void directoryMonitor(char *_ip, int _port, char _route[]);
 
 
-
+// Proceso principal
 int main(int argc, char ** argv) { 
     directoryMonitor(argv[1], atoi(argv[2]), argv[3]);
     exit(0);
 } 
 
 
-
+// Inotify
 void directoryMonitor(char *_ip, int _port, char _route[]){
     int fdDirectory, wdCreate;      // File Descriptor de la carpeta a monitorizar y watch desciptor del evento
     char buffInotify[BUFF_SIZE];     // Buffer de la informacion de InotifyEvent
@@ -83,7 +83,7 @@ void directoryMonitor(char *_ip, int _port, char _route[]){
 
 
 
-
+// Socket cliente (Transmision de archivos)
 void clientSocket(char *_ip, int _port, char *_routeRoot, char *name, int fdDirectory, int wdCreate){
 
     int fdSocket;                       // File Descriptor del socket
@@ -105,6 +105,7 @@ void clientSocket(char *_ip, int _port, char *_routeRoot, char *name, int fdDire
     serverAddr.sin_addr.s_addr = inet_addr( _ip );
     serverAddr.sin_port = htons( _port );
 
+    // Obtiene la ruta absoluta del archivo creado
     char _absoluteRoute[BUFF_SIZE] = {0};
     buscarArchivo(_routeRoot, name, _absoluteRoute);
 
@@ -138,6 +139,7 @@ void clientSocket(char *_ip, int _port, char *_routeRoot, char *name, int fdDire
 
     printf("[CLIENTE]: Ruta absoluta del archivo: %s\n", _absoluteRoute);
     printf("[CLIENTE]: Ruta relativa del archivo: %s\n", _relativeRoute);
+
     // Abre el archivo creado en modo lectura binaria
     FILE *fileOut = fopen(_absoluteRoute,"rb");
     if(fileOut == NULL){
@@ -146,6 +148,9 @@ void clientSocket(char *_ip, int _port, char *_routeRoot, char *name, int fdDire
 	  }
     printf("[CLIENTE]: Archivo creado abierto exitosamente. \n");
 
+    // Intenta abrir el archivo en forma de directorio
+    // para saber si es directorio o archivo
+    // En caso de que sea directorio le añade un watch descriptor
     DIR *isDir = opendir(_absoluteRoute);
     if (!(isDir = opendir(_absoluteRoute))){
         printf("[CLIENTE]: Es un archivo\n");
@@ -174,7 +179,7 @@ void clientSocket(char *_ip, int _port, char *_routeRoot, char *name, int fdDire
 
 
 
-
+// Busca el archivo creado en los subdirectorios y regresa la ruta abtoluta de este
 void buscarArchivo(char *routeRoot, char *name, char *_route){
     DIR *dir;
     struct dirent *entry;
@@ -214,7 +219,7 @@ void buscarArchivo(char *routeRoot, char *name, char *_route){
 
 
 
-
+// Añade una Directorio y sus subdirectorios un watch descriptor
 void addWatchToTree(int fdDirectory, char *_route, int wdCreate){
     DIR *dir;
     struct dirent *entry;
@@ -246,16 +251,18 @@ void addWatchToTree(int fdDirectory, char *_route, int wdCreate){
 
 
 
-
+// Se conecta con el servidor y envia el archivo
 void enviarArchivo(int fdConnection, FILE *fdFile, char *name){
     char data[BUFF_SIZE] = {0};
     char msj[BUFF_SIZE] = {0};
 
+    // Le envia la ruta relativa del archivo y recibe confirmacion
     printf("[CLIENTE]: Mandando ruta de archivo.\n");
     write(fdConnection, name, BUFF_SIZE);
     read(fdConnection, msj, BUFF_SIZE);
     printf("[SERVIDOR]: %s.\n");
 
+    // Inicia la tranferencia del archivo
     printf("[CLIENTE]: Iniciando Transferencia\n");
     while(fgets(data, BUFF_SIZE, fdFile) != NULL) {
         if (send(fdConnection, data, sizeof(data), 0) == -1) {
@@ -267,10 +274,3 @@ void enviarArchivo(int fdConnection, FILE *fdFile, char *name){
     printf("[CLIENTE]: Transferencia Completada\n");
     close(fdConnection);
 }
-
-
-
-
-
-
-
