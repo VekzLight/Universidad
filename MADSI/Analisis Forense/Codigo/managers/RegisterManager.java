@@ -87,6 +87,54 @@ public class RegisterManager {
             System.out.println("No existe el archivo o esta corrupto.");
         }
     }
+    
+     public void loadRegisters(ArrayList<String> content){
+        int count = 0;
+        System.out.print("Separando Informacion Util...");
+        for(String it: content){
+            String _it_split[] = it.split(" ");
+
+            Pattern pat_corchetes = Pattern.compile(".*[\\[\\d*\\]].*");
+            Matcher match_corchetes = pat_corchetes.matcher(_it_split[4]);
+
+            Pattern pat_FPass = Pattern.compile(".*Failed\\spassword.*");
+            Matcher match_FPass = pat_FPass.matcher(it);
+
+            Pattern pat_sudo = Pattern.compile("^sudo.*");
+            Matcher match_sudo = pat_sudo.matcher(_it_split[4]);
+
+            if (!match_sudo.matches() && match_FPass.matches()) {
+                RegisterLog _reglog = new RegisterLog();
+
+                String date = _it_split[0] + " " + _it_split[1] + " " + _it_split[2];
+                String server = _it_split[3];
+                String protocol = "null";
+                String description = "null";
+                int sysId = -1;       
+
+                if(match_corchetes.matches()){
+                    String protocol_split[] = _it_split[4].split("\\[");
+                    protocol = protocol_split[0];
+                    sysId = Integer.parseInt(protocol_split[1].substring(0, protocol_split[1].length() - 2));
+                } else {
+                    protocol = _it_split[4].substring(0, _it_split[4].length() - 1);
+                }
+
+                int begin_description = it.split(":\\s")[0].length()+2;
+                description = it.substring(begin_description);
+
+                _reglog.setServer(server);
+                _reglog.setDate(date);
+                _reglog.setDesciption(description);
+                _reglog.setSysId(sysId);
+                _reglog.setProtocol(protocol);
+                registers.add(_reglog);
+            }
+            if(count <= this.bufferSize) count++;
+            else break;
+        }
+        System.out.println("Listo!");
+    }
 
     public ArrayList<RegisterLog> getRegisters() { return registers; }
     public RegisterLog getRegister(int index){ return registers.get(index); }

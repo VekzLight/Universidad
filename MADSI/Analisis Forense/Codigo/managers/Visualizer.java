@@ -5,391 +5,32 @@
  */
 package uam.azc.madsi.af.managers;
 
+import com.google.gson.Gson;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Scanner;
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartPanel;
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.data.category.DefaultCategoryDataset;
-import uam.azc.madsi.af.frames.VGraphic;
 import uam.azc.madsi.af.models.Attack;
 
 
 import java.util.Hashtable;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  *
  * @author Vekz Light Breeze
  */
 public class Visualizer {
-
-    // Create a graphic
-    public void graphicData(JFreeChart bGraphic){
-        ChartPanel cpGraphic = new ChartPanel(bGraphic);
-        cpGraphic.setMouseWheelEnabled(true);
-        cpGraphic.setPreferredSize(new Dimension(800,900));
-        
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                VGraphic vGraphic = new VGraphic();
-                vGraphic.setPanelGraphic(cpGraphic);
-                vGraphic.setVisible(true);
-            }
-        });
-    }
-    
-
-    // Graphics of specific counter data
-    public void graphicAttacksIPType(String type){
-        AttackAnalyzer attackAnalyzer = AttackAnalyzer.getInstance();
-        ArrayList<Attack> attacks = attackAnalyzer.getAttacksOfType(type);
-
-        DefaultCategoryDataset data = new DefaultCategoryDataset();
-        
-        for(Attack it: attacks)
-            data.setValue(it.getCountIPs(),"# IPs",it.getAttackId()+"");
-        
-        JFreeChart bGraphic = ChartFactory.createBarChart(
-                "IPs Counter - " + type, 
-                "Attack ID", 
-                "Counter", 
-                data, 
-                PlotOrientation.VERTICAL, 
-                true, 
-                true, 
-                false
-        );
-        
-        graphicData(bGraphic);
-    }
- 
-    public void graphicAttacksCountryType(String type){
-        AttackAnalyzer attackAnalyzer = AttackAnalyzer.getInstance();
-        ArrayList<Attack> attacks = attackAnalyzer.getAttacksOfType(type);
-
-        DefaultCategoryDataset data = new DefaultCategoryDataset();
-        
-        for(Attack it: attacks)
-            data.setValue(it.getCountCountries(),"# Countries",it.getAttackId()+"");
-        
-        JFreeChart bGraphic = ChartFactory.createBarChart(
-                "Countries Counter - "+ type, 
-                "Attack ID", 
-                "Counter", 
-                data, 
-                PlotOrientation.VERTICAL, 
-                true, 
-                true, 
-                false
-        );
-        
-        graphicData(bGraphic);
-    }
-    
-    public void graphicAttacksUsersType(String type){
-        AttackAnalyzer attackAnalyzer = AttackAnalyzer.getInstance();
-        ArrayList<Attack> attacks = attackAnalyzer.getAttacksOfType(type);
-
-        DefaultCategoryDataset data = new DefaultCategoryDataset();
-        
-        for(Attack it: attacks)
-            data.setValue(it.getCountUsers(),"# Users",it.getAttackId()+"");
-        
-        JFreeChart bGraphic = ChartFactory.createBarChart(
-                "Users Counter - "+ type, 
-                "Attack ID", 
-                "Counter", 
-                data, 
-                PlotOrientation.VERTICAL, 
-                true, 
-                true, 
-                false
-        );
-        
-        graphicData(bGraphic);
-    }
-
-
-    // Graphics of Diff Specific counter data
-    public void graphicDiffIPTypeOf(String type, int attackIdRelative){
-        AttackAnalyzer attackAnalyzer = AttackAnalyzer.getInstance();
-        ArrayList<Attack> attacks = attackAnalyzer.getAttacksOfType(type);
-        Attack attack = attacks.get(attackIdRelative);
-        ArrayList<String> ips = attack.getIPs();
-        
-        DefaultCategoryDataset data = new DefaultCategoryDataset();
-        
-        for(String it: ips)
-            data.setValue(attack.getCountIp(it),"IPs", it);
-        
-        JFreeChart bGraphic = ChartFactory.createBarChart(
-                "Connections per IP - " + type, 
-                "IPs", 
-                "Connections", 
-                data, 
-                PlotOrientation.HORIZONTAL, 
-                true, 
-                true, 
-                false
-        );
-        
-        graphicData(bGraphic);
-    }
-    
-    public void graphicDiffCountryTypeOf(String type, int attackIdRelative){
-        AttackAnalyzer attackAnalyzer = AttackAnalyzer.getInstance();
-        ArrayList<Attack> attacks = attackAnalyzer.getAttacksOfType(type);
-        Attack attack = attacks.get(attackIdRelative);
-        ArrayList<String> countries = attack.getCountries();
-        
-        DefaultCategoryDataset data = new DefaultCategoryDataset();
-        
-        for(String it: countries)
-            data.setValue(attack.getCountCountry(it),"Countries", it);
-        
-        JFreeChart bGraphic = ChartFactory.createBarChart(
-                "Connections per Country - " + type, 
-                "Country", 
-                "Connections", 
-                data, 
-                PlotOrientation.HORIZONTAL, 
-                true, 
-                true, 
-                false
-        );
-        
-        graphicData(bGraphic);
-    }
-    
-    public void graphicDiffUsersTypeOf(String type, int attackIdRelative){
-        AttackAnalyzer attackAnalyzer = AttackAnalyzer.getInstance();
-        ArrayList<Attack> attacks = attackAnalyzer.getAttacksOfType(type);
-        Attack attack = attacks.get(attackIdRelative);
-        ArrayList<String> users = attack.getUsers();
-        
-        DefaultCategoryDataset data = new DefaultCategoryDataset();
-        
-        for(String it: users)
-            data.setValue(attack.getCountUser(it),"Users", it);
-        
-        JFreeChart bGraphic = ChartFactory.createBarChart(
-                "Connections per User - " + type, 
-                "User", 
-                "Connections", 
-                data, 
-                PlotOrientation.HORIZONTAL, 
-                true, 
-                true, 
-                false
-        );
-        
-        graphicData(bGraphic);
-    }
-
-
-    // Graphics of all Diff Specific counter data
-    public void graphicAllIPsType(String type){
-        AttackAnalyzer attackAnalyzer = AttackAnalyzer.getInstance();
-        ArrayList<Attack> attacks = attackAnalyzer.getAttacksOfType(type);
-
-        ArrayList<String> ips = new ArrayList<>();
-        for(Attack it: attacks)
-            ips.addAll(it.getIPs());
-        
-        DefaultCategoryDataset data = new DefaultCategoryDataset();
-        
-        for(String it: ips){
-            int countIPs = 0;
-            for(Attack _it: attacks)
-                countIPs += _it.getCountIp(it);
-            data.setValue(countIPs,"IPs", it);
-        }
-        
-        JFreeChart bGraphic = ChartFactory.createBarChart(
-                "Connections of All IP - " + type, 
-                "IP", 
-                "Connections", 
-                data, 
-                PlotOrientation.HORIZONTAL, 
-                true, 
-                true, 
-                false
-        );
-        
-        graphicData(bGraphic);
-    }
-    
-    public void graphicAllCountriesType(String type){
-        AttackAnalyzer attackAnalyzer = AttackAnalyzer.getInstance();
-        ArrayList<Attack> attacks = attackAnalyzer.getAttacksOfType(type);
-
-        ArrayList<String> countries = new ArrayList<>();
-        for(Attack it: attacks)
-            countries.addAll(it.getCountries());
-        
-        DefaultCategoryDataset data = new DefaultCategoryDataset();
-        
-        for(String it: countries){
-            int countCountries = 0;
-            for(Attack _it: attacks)
-                countCountries += _it.getCountCountry(it);
-            data.setValue(countCountries,"Countries", it);
-        }
-        
-        JFreeChart bGraphic = ChartFactory.createBarChart(
-                "Connections of All Countries - " + type, 
-                "Country", 
-                "Connections", 
-                data, 
-                PlotOrientation.HORIZONTAL, 
-                true, 
-                true, 
-                false
-        );
-        
-        graphicData(bGraphic);
-    }
-    
-    public void graphicAllUsersType(String type){
-        AttackAnalyzer attackAnalyzer = AttackAnalyzer.getInstance();
-        ArrayList<Attack> attacks = attackAnalyzer.getAttacksOfType(type);
-
-        ArrayList<String> users = new ArrayList<>();
-        for(Attack it: attacks)
-            users.addAll(it.getUsers());
-        
-        DefaultCategoryDataset data = new DefaultCategoryDataset();
-        
-        for(String it: users){
-            int countUsers = 0;
-            for(Attack _it: attacks)
-                countUsers += _it.getCountUser(it);
-            data.setValue(countUsers,"Users", it);
-        }
-        
-        JFreeChart bGraphic = ChartFactory.createBarChart(
-                "Connections of All Users - " + type, 
-                "User", 
-                "Connections", 
-                data, 
-                PlotOrientation.HORIZONTAL, 
-                true, 
-                true, 
-                false
-        );
-        
-        graphicData(bGraphic);
-    }
-    
-    
-    // Graphics all Attacks counters
-    public void graphicAllIPs(){
-        AttackAnalyzer attackAnalyzer = AttackAnalyzer.getInstance();
-        ArrayList<Attack> attacks = attackAnalyzer.getAttacks();
-
-        ArrayList<String> ips = new ArrayList<>();
-        for(Attack it: attacks)
-            ips.addAll(it.getIPs());
-        
-        DefaultCategoryDataset data = new DefaultCategoryDataset();
-        
-        for(String it: ips){
-            int countIPs = 0;
-            for(Attack _it: attacks)
-                countIPs += _it.getCountIp(it);
-            data.setValue(countIPs,"IPs", it);
-        }
-        
-        JFreeChart bGraphic = ChartFactory.createBarChart(
-                "Connections of All IP's - All Types Of Attacks", 
-                "IP", 
-                "Connections", 
-                data, 
-                PlotOrientation.HORIZONTAL, 
-                true, 
-                true, 
-                false
-        );
-        
-        graphicData(bGraphic);
-    }
-    
-    public void graphicAllCountries(){
-        AttackAnalyzer attackAnalyzer = AttackAnalyzer.getInstance();
-        ArrayList<Attack> attacks = attackAnalyzer.getAttacks();
-
-        ArrayList<String> countries = new ArrayList<>();
-        for(Attack it: attacks)
-            countries.addAll(it.getCountries());
-        
-        DefaultCategoryDataset data = new DefaultCategoryDataset();
-        
-        for(String it: countries){
-            int countCountries = 0;
-            for(Attack _it: attacks)
-                countCountries += _it.getCountCountry(it);
-            data.setValue(countCountries,"Countries", it);
-        }
-        
-        JFreeChart bGraphic = ChartFactory.createBarChart(
-                "Connections of All Countries - All Types Of Attacks", 
-                "Country", 
-                "Connections", 
-                data, 
-                PlotOrientation.HORIZONTAL, 
-                true, 
-                true, 
-                false
-        );
-        
-        graphicData(bGraphic);
-    }
-    
-    public void graphicAllUsers(){
-        AttackAnalyzer attackAnalyzer = AttackAnalyzer.getInstance();
-        ArrayList<Attack> attacks = attackAnalyzer.getAttacks();
-
-        ArrayList<String> users = new ArrayList<>();
-        for(Attack it: attacks)
-            users.addAll(it.getUsers());
-        
-        DefaultCategoryDataset data = new DefaultCategoryDataset();
-        
-        for(String it: users){
-            int countUsers = 0;
-            for(Attack _it: attacks)
-                countUsers += _it.getCountUser(it);
-            data.setValue(countUsers,"Users", it);
-        }
-        
-        JFreeChart bGraphic = ChartFactory.createBarChart(
-                "Connections of All Users - All Types Of Attacks", 
-                "User", 
-                "Connections", 
-                data, 
-                PlotOrientation.HORIZONTAL, 
-                true, 
-                true, 
-                false
-        );
-        
-        graphicData(bGraphic);
-    }
-
-       
-    
-
     
     public String getSpecificStatistics(String type){
         switch(type){
@@ -443,9 +84,9 @@ public class Visualizer {
                     
                     if(response == 0) printGeneralStatistic();
                     else if(response == 1){
-                        graphicAllIPs();
-                        graphicAllCountries();
-                        graphicAllUsers();
+                     //   graphicAllIPs();
+                     //   graphicAllCountries();
+                     //   graphicAllUsers();
                     } else System.out.println("No es una opcion valida");
                     break;
                 case 1:
@@ -473,9 +114,9 @@ public class Visualizer {
                         String type = "DDoS";
                         if(response == 5) type = "BruteForce";
                         if(response == 6) type = "Dictionary";
-                        graphicAllIPsType(type);
-                        graphicAllCountriesType(type);
-                        graphicAllUsersType(type);
+                      //  graphicAllIPsType(type);
+                      //  graphicAllCountriesType(type);
+                      //  graphicAllUsersType(type);
                     }else System.out.println("No es una opcion valida");
                     break;
                 case 2: 
@@ -490,15 +131,14 @@ public class Visualizer {
     
     
     
-    
     public ArrayList<String> getGeneralStatistics(){
         AttackAnalyzer attackAnalyzer = AttackAnalyzer.getInstance();
         ArrayList<String> statistics = new ArrayList<>();
-        
+                
         statistics.add(attackAnalyzer.getAttacks().size()+"");
         statistics.add(attackAnalyzer.getRegisterData().size()+"");
         statistics.add(attackAnalyzer.filterRepeatedIPs(0, -1).size()+"");
-        statistics.add(attackAnalyzer.filterRepeatedIPs(0, -1).size()+"");
+        statistics.add(attackAnalyzer.filterRepeatedUsers(0, -1).size()+"");
         statistics.add(attackAnalyzer.filterRepeatedCountries(0, -1).size()+"");
         
         String mostIp[] = attackAnalyzer.filterMostRepeatedIP(0, -1).split(":");
@@ -514,9 +154,6 @@ public class Visualizer {
         return statistics;
     }
     
-    
-    
-    
     public Hashtable<Integer, Integer> gcAttacksIPType(String type){
         AttackAnalyzer attackAnalyzer = AttackAnalyzer.getInstance();
         ArrayList<Attack> attacks = attackAnalyzer.getAttacksOfType(type);
@@ -525,7 +162,7 @@ public class Visualizer {
         for(Attack it: attacks)
             content.put(it.getCountIPs(), it.getAttackId());
         
-          
+        
         return content;
     }
  
@@ -537,7 +174,7 @@ public class Visualizer {
         for(Attack it: attacks)
             content.put(it.getCountCountries(), it.getAttackId());
         
-          
+        
         return content;
     }
     
@@ -550,7 +187,6 @@ public class Visualizer {
         for(Attack it: attacks)
             content.put(it.getAttackId(), it.getCountUsers());
         
-          
         return content;
     }
 
@@ -568,7 +204,7 @@ public class Visualizer {
         for(String it: ips)
             content.put(it, attack.getCountIp(it));
         
-          
+        
         return content;
     }
     
@@ -582,7 +218,7 @@ public class Visualizer {
         for(String it: countries)
             content.put(it, attack.getCountCountry(it));
         
-          
+        
         return content;
     }
     
@@ -599,12 +235,14 @@ public class Visualizer {
             content.put(it, attack.getCountUser(it));
         
           
+        
         return content;
     }
 
 
     
     // Graphics of all Diff Specific counter data
+    @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     public Hashtable<String, Integer> gcAllIPsType(String type){
         AttackAnalyzer attackAnalyzer = AttackAnalyzer.getInstance();
         ArrayList<Attack> attacks = attackAnalyzer.getAttacksOfType(type);
@@ -622,6 +260,7 @@ public class Visualizer {
             content.put(it, countIPs);
         }
 
+        
         return content;
     }
     
@@ -642,6 +281,7 @@ public class Visualizer {
             content.put(it, countCountries);
         }
 
+        
         return content;
     }
     
@@ -662,6 +302,7 @@ public class Visualizer {
             content.put(it, countUsers);
         }
 
+        
         return content;
     }
     
@@ -685,6 +326,7 @@ public class Visualizer {
             content.put(it, countIPs);
         }
 
+        
         return content;
     }
     
@@ -705,6 +347,7 @@ public class Visualizer {
             content.put(it, countCountries);
         }
 
+        
         return content;
     }
     

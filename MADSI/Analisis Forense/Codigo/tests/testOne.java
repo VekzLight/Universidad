@@ -5,7 +5,14 @@
  */
 package uam.azc.madsi.af.tests;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Hashtable;
 import java.util.Scanner;
 import javafx.application.Application;
@@ -13,14 +20,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import uam.azc.madsi.af.frames.VGraphic;
 import uam.azc.madsi.af.models.Attack;
 import uam.azc.madsi.af.io.Reader;
 import uam.azc.madsi.af.managers.AttackAnalyzer;
 import uam.azc.madsi.af.managers.DataAnalyzer;
 import uam.azc.madsi.af.managers.RegisterManager;
 import uam.azc.madsi.af.managers.Visualizer;
-import uam.azc.madsi.af.managers.ServerConfig;
 import uam.azc.madsi.af.models.RegisterData;
 import uam.azc.madsi.af.models.RegisterLog;
 
@@ -30,13 +35,28 @@ import uam.azc.madsi.af.models.RegisterLog;
  */
 public class testOne {
 
-    public static void main(String args[]){
+    public static void main(String args[]) throws FileNotFoundException, IOException{
         //probeWM(args);
+ 
     }
 /*
     public static void probeWM(String args[]){
         ServerConfig wm = new ServerConfig();
         wm.initWM(args);
+    
+        BufferedReader buffReader = null;
+        
+        String dataurl= "data:text/plain;base64,aG9sYSBtdW5kbwptdW5kbyAxMgpjdWFyZW50YQ==";
+        String dat = dataurl.split(",")[1];
+        byte[] decoded = Base64.getDecoder().decode(dat);
+        String datos = new String(decoded);
+        System.out.println("Leyendo archivo...");
+        System.out.println(datos);
+        
+        ArrayList<String> contenido = new ArrayList<>();
+        String[] datosSep = datos.split("\n");
+        for(String it: datosSep)
+            contenido.add(it);
     }
   */  
     public static void probeAttackAnalize(){

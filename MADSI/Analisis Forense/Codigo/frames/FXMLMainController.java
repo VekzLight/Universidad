@@ -83,19 +83,7 @@ public class FXMLMainController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       
-        initLabels();
-        initChoiceBox();
-        initRadioButtons();
-        
-        _attacks = new ArrayList<>();
-        visualizer = new Visualizer();
-        
-        slTiempoHumano.valueProperty().addListener( new ChangeListener<Number>(){
-            public void changed(ObservableValue <? extends Number > observable, Number oldValue, Number newValue){
-                tfTiempoHumano.setText(newValue+"");
-            }
-        });
+
     }    
     
     public void initRadioButtons(){
@@ -210,7 +198,7 @@ public class FXMLMainController implements Initializable {
             }
         }
     }
-    
+    /*
     @FXML
     private void handleGraficarAction(ActionEvent event) throws IOException {
                 
@@ -244,7 +232,7 @@ public class FXMLMainController implements Initializable {
                 }
             }
         }
-    }
+    }*/
     
     @FXML
     private void handleRegresarAction(ActionEvent event) throws IOException {

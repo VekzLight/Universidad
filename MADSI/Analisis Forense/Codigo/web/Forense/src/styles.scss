@@ -1,2 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
-#mapid { height: 180px; }
+*{
+    border: none;
+    margin: none;
+}
+
+body{
+    background-color: rgb(255, 255, 255);
+}
+
+app-root{
+    text-align: center;
+}
+
+h1 {
+    color:hotpink;
+    text-align: center;
+}
+
+#mapid { 
+    height: 180px;
+}
