@@ -1,0 +1,90 @@
+<div class="container">
+    <table class="table table-borderless">
+        <thead>
+            <td colspan="5"><h1 class="h3">Estadisticas Generales</h1></td>
+        </thead>
+        <tbody>
+            <tr class="table-active">
+                <td colspan="2">Recuento</td>
+            </tr>
+            <tr >
+                <td>Ataques</td>
+                <td>{{ nAtaques }}</td>
+            </tr>
+            <tr>
+                <td>Intentos</td>
+                <td>{{ nIntentos }}</td>
+                <td class="table-active" colspan="2">Mas Repetido</td>
+            </tr>
+            <tr>
+                <td>IPs</td>
+                <td>{{ nIPs }}</td>
+                <td>IP</td>
+                <td>{{ nIPMost }}</td>
+            </tr>
+            <tr>
+                <td>Usuarios</td>
+                <td>{{ nUsuarios }}</td>
+                <td>Usuario</td>
+                <td>{{ nUsuarioMost }}</td>
+            </tr>
+            <tr>
+                <td>Paises</td>
+                <td>{{ nPaises }}</td>
+                <td>Pais</td>
+                <td>{{ nPaisMost }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="container">
+    <table class="table table-borderless">
+        <thead>
+            <td colspan="5"><h1 class="h3">Configuracion</h1></td>
+        </thead>
+        <tbody>
+            <tr >
+                <td>IP</td>
+                <td>
+                    <select id="boxip" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                        <option selected>Todo</option>
+                    </select>
+                </td>
+                <td>Attaque ID</td>
+                <td>
+                    <select id="boxid" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                        <option selected>Todo</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Usuario</td>
+                <td>
+                    <select id="boxusuario" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                        <option selected>Todo</option>
+                    </select>
+                </td>
+                <td>Tipo</td>
+                <td>
+                    <select id="boxtipo" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                        <option selected>Todo</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Pais</td>
+                <td>
+                    <select id="boxpais" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                        <option selected>Todo</option>
+                    </select>
+                </td>
+                <td colspan="2">
+                    <input type="submit" class="btnMe btn btn-info input-group-text" for="inputGroupFile02" value="Enviar">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<app-map></app-map>
