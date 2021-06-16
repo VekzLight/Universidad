@@ -5,6 +5,7 @@
  */
 package uam.azc.madsi.af.tests;
 
+import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -36,8 +37,28 @@ import uam.azc.madsi.af.models.RegisterLog;
 public class testOne {
 
     public static void main(String args[]) throws FileNotFoundException, IOException{
-        //probeWM(args);
- 
+        RegisterManager regManager = new RegisterManager();
+        regManager.setBufferSize(1000);
+        regManager.loadRegisters("auth.log");
+        
+        DataAnalyzer dataAnalyzer = new DataAnalyzer();
+        dataAnalyzer.analizeLog(regManager.getRegisters());
+        
+        AttackAnalyzer attack = AttackAnalyzer.getInstance();
+        attack.setRegistersData(dataAnalyzer.getRegisters());
+        attack.setTimeAttack(60000);
+        attack.analyzeAttacks();
+       
+        Visualizer visual = new Visualizer();
+        Hashtable<String, Integer> content = visual.gcAllIPs();
+        ArrayList<String> ips = new ArrayList<>();
+        for(String it:content.keySet()){
+            ips.add(it + ":" +content.get(it));
+        }
+        
+        Gson gson = new Gson();
+        String respuesta = gson.toJson(ips);
+        System.out.println(respuesta);
     }
 /*
     public static void probeWM(String args[]){

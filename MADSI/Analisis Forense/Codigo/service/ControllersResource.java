@@ -45,9 +45,6 @@ public class ControllersResource {
     }
 
 
-    
-    
-    
     @GET
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     public Response getJson() {
@@ -59,7 +56,6 @@ public class ControllersResource {
                 .header("Access-Control-Allow-Methos", "POST, GET, PUT, UPDATE, OPTIONS")
                 .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
     }
-
 
     @Path("/archivo")
     @POST
@@ -100,177 +96,21 @@ public class ControllersResource {
                 .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
     }
     
-    
-    @Path("/AttacksIPType")
-    @POST
-    @Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
-    @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
-    //public Hashtable<Integer, Integer> gcAttacksIPType(String type){
-    public Response gcAttacksIPType(String type){
-        Hashtable<Integer, Integer> content = new Visualizer().gcAttacksIPType(type);
-          
-        Gson gson = new Gson();
-        String respuesta = gson.toJson(content);
-        return Response.ok(respuesta.toString())
-                .header("Access-Control-Allow-Origin", "*")
-                .header("Access-Control-Allow-Methos", "POST, GET, PUT, UPDATE, OPTIONS")
-                .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
-    }
-/* 
-    @Path("/AttacksCountryType")
-    @GET
-    @Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
-    @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
-    //public Hashtable<Integer, Integer> gcAttacksCountryType(String type){
-    public Response gcAttacksCountryType(String type){
-        
-        Hashtable<Integer, Integer> content = new Visualizer().gcAttacksCountryType(type);
- 
-        Gson gson = new Gson();
-        String respuesta = gson.toJson(content);
-        return Response.ok(respuesta.toString())
-                .header("Access-Control-Allow-Origin", "*")
-                .header("Access-Control-Allow-Methos", "POST, GET, PUT, UPDATE, OPTIONS")
-                .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
-    }
-    
-    @Path("/AttacksUsersType")
-    @GET
-    @Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
-    @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
-    //public Hashtable<Integer, Integer> gcAttacksUsersType(String type){
-    public Response gcAttacksUsersType(String type){
-        Hashtable<Integer, Integer> content = new Visualizer(). gcAttacksUsersType(type);
-
-        Gson gson = new Gson();
-        String respuesta = gson.toJson(content);
-        return Response.ok(respuesta.toString())
-                .header("Access-Control-Allow-Origin", "*")
-                .header("Access-Control-Allow-Methos", "POST, GET, PUT, UPDATE, OPTIONS")
-                .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
-    }
-
-
-    
-    // Graphics of Diff Specific counter data
-    @Path("/DiffIPTypeOf")
-    @GET
-    @Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
-    @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
-    //public Hashtable<String, Integer> gcDiffIPTypeOf(String type, int attackIdRelative){
-    public Response gcDiffIPTypeOf(String type, int attackIdRelative){
-        Hashtable<String, Integer> content = new Visualizer().gcDiffIPTypeOf(type, attackIdRelative);
-        
- 
-        Gson gson = new Gson();
-        String respuesta = gson.toJson(content);
-        return Response.ok(respuesta.toString())
-                .header("Access-Control-Allow-Origin", "*")
-                .header("Access-Control-Allow-Methos", "POST, GET, PUT, UPDATE, OPTIONS")
-                .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
-    }
-    
-    
-    @Path("/DiffCountryTypeOf")
-    @GET
-    @Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
-    @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
-    //public Hashtable<String, Integer> gcDiffCountryTypeOf(String type, int attackIdRelative){
-    public Response gcDiffCountryTypeOf(String type, int attackIdRelative){
-        Hashtable<String, Integer> content = new Visualizer().gcDiffCountryTypeOf(type, attackIdRelative);
-       
-        Gson gson = new Gson();
-        String respuesta = gson.toJson(content);
-        return Response.ok(respuesta.toString())
-                .header("Access-Control-Allow-Origin", "*")
-                .header("Access-Control-Allow-Methos", "POST, GET, PUT, UPDATE, OPTIONS")
-                .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
-    }
-    
-    @Path("/DiffUsersTypeOf")
-    @GET
-    @Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
-    @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
-    //public Hashtable<String, Integer> gcDiffUsersTypeOf(String type, int attackIdRelative){
-    public Response gcDiffUsersTypeOf(String type, int attackIdRelative){
-        Hashtable<String, Integer> content = new Visualizer().gcDiffUsersTypeOf(type, attackIdRelative);
-        
-                  
-        Gson gson = new Gson();
-        String respuesta = gson.toJson(content);
-        return Response.ok(respuesta.toString())
-                .header("Access-Control-Allow-Origin", "*")
-                .header("Access-Control-Allow-Methos", "POST, GET, PUT, UPDATE, OPTIONS")
-                .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
-    }
-
-
-    
-    // Graphics of all Diff Specific counter data
-    @Path("/AllIPsType")
-    @GET
-    @Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
-    @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
-    //public Hashtable<String, Integer> gcAllIPsType(String type){
-    public Response gcAllIPsType(String type){
-        Hashtable<String, Integer> content = new Visualizer().gcAllIPsType(type);
-
-        Gson gson = new Gson();
-        String respuesta = gson.toJson(content);
-        return Response.ok(respuesta.toString())
-                .header("Access-Control-Allow-Origin", "*")
-                .header("Access-Control-Allow-Methos", "POST, GET, PUT, UPDATE, OPTIONS")
-                .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
-    }
-    
-    @Path("/AllCountriesType")
-    @GET
-    @Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
-    @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
-    //public Hashtable<String, Integer> gcAllCountriesType(String type){
-    public Response gcAllCountriesType(String type){
-        Hashtable<String, Integer> content = new Visualizer().gcAllCountriesType(type);
-        
-       
-        Gson gson = new Gson();
-        String respuesta = gson.toJson(content);
-        return Response.ok(respuesta.toString())
-                .header("Access-Control-Allow-Origin", "*")
-                .header("Access-Control-Allow-Methos", "POST, GET, PUT, UPDATE, OPTIONS")
-                .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
-    }
-    
-    @Path("/AllUsersType")
-    @GET
-    @Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
-    @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
-    //public Hashtable<String, Integer> gcAllUsersType(String type){
-    public Response gcAllUsersType(String type){
-        Hashtable<String, Integer> content = new Visualizer().gcAllUsersType(type);
-        
-        
-        Gson gson = new Gson();
-        String respuesta = gson.toJson(content);
-        return Response.ok(respuesta.toString())
-                .header("Access-Control-Allow-Origin", "*")
-                .header("Access-Control-Allow-Methos", "POST, GET, PUT, UPDATE, OPTIONS")
-                .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
-    }
-    
-    
-    
     // Graphics all Attacks counters
     @Path("/AllIPs")
     @GET
-    @Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
-    //public Hashtable<String, Integer> gcAllIPs(){
     public Response gcAllIPs(){
-        Hashtable<String, Integer> content = new Visualizer().gcAllIPs();
-        
+        Visualizer visual = new Visualizer();
+        Hashtable<String, Integer> content = visual.gcAllIPs();
+        ArrayList<String> ips = new ArrayList<>();
+        for(String it:content.keySet()){
+            ips.add(it + ":" +content.get(it));
+            System.out.println(it);
+        }
         
         Gson gson = new Gson();
-        String respuesta = gson.toJson(content);
+        String respuesta = gson.toJson(ips);
         return Response.ok(respuesta.toString())
                 .header("Access-Control-Allow-Origin", "*")
                 .header("Access-Control-Allow-Methos", "POST, GET, PUT, UPDATE, OPTIONS")
@@ -279,15 +119,18 @@ public class ControllersResource {
     
     @Path("/AllCountries")
     @GET
-    @Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
-    //public Hashtable<String, Integer> gcAllCountries(){
     public Response gcAllCountries(){
-        Hashtable<String, Integer> content = new Visualizer().gcAllCountries();
-        
+        Visualizer visual = new Visualizer();
+        Hashtable<String, Integer> content = visual.gcAllCountries();
+        ArrayList<String> countries = new ArrayList<>();
+        for(String it:content.keySet()){
+            countries.add(it +":" +content.get(it));
+            System.out.println(it);
+        }
         
         Gson gson = new Gson();
-        String respuesta = gson.toJson(content);
+        String respuesta = gson.toJson(countries);
         return Response.ok(respuesta.toString())
                 .header("Access-Control-Allow-Origin", "*")
                 .header("Access-Control-Allow-Methos", "POST, GET, PUT, UPDATE, OPTIONS")
@@ -296,20 +139,22 @@ public class ControllersResource {
     
     @Path("/AllUsers")
     @GET
-    @Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
-    //public Hashtable<String, Integer> gcAllUsers(){
     public Response gcAllUsers(){
-        Hashtable<String, Integer> content = new Visualizer().gcAllUsers();
-        
-        
+        Visualizer visual = new Visualizer();
+        Hashtable<String, Integer> content = visual.gcAllUsers();
+        ArrayList<String> countries = new ArrayList<>();
+        for(String it:content.keySet()){
+            countries.add(it + ":"+content.get(it));
+            System.out.println(it);
+        }
 
         Gson gson = new Gson();
-        String respuesta = gson.toJson(content);
+        String respuesta = gson.toJson(countries);
         return Response.ok(respuesta.toString())
                 .header("Access-Control-Allow-Origin", "*")
                 .header("Access-Control-Allow-Methos", "POST, GET, PUT, UPDATE, OPTIONS")
                 .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With").build();
     }
-*/
+
 }

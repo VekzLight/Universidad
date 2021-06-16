@@ -336,8 +336,10 @@ public class Visualizer {
         Hashtable<String, Integer> content = new Hashtable<>();
         
         ArrayList<String> countries = new ArrayList<>();
-        for(Attack it: attacks)
+        for(Attack it: attacks){
             countries.addAll(it.getCountries());
+            
+        }
         
         
         for(String it: countries){
@@ -347,6 +349,7 @@ public class Visualizer {
             content.put(it, countCountries);
         }
 
+        
         
         return content;
     }

@@ -20,9 +20,27 @@ public class RegisterData {
     private int sysId;
    
     private String ip;
+    private String latitude;
+    private String longitude;
     private String country;
     private String user;
     private int port;
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
 
 
     public String getCountry() { return country; }
@@ -51,7 +69,8 @@ public class RegisterData {
 
     @Override
     public String toString() {
-        return "RegisterData{" + "regDate=" + regDate + ", server=" + server + ", protocol=" + protocol + ", sysId=" + sysId + ", ip=" + ip + ", country=" + country + ", user=" + user + ", port=" + port + '}';
+        return "RegisterData{" + "regDate=" + regDate + ", server=" + server + ", protocol=" + protocol + ", sysId=" + sysId + ", ip=" + ip + ", latitude=" + latitude + ", longitude=" + longitude + ", country=" + country + ", user=" + user + ", port=" + port + '}';
     }
 
+    
 }

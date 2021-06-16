@@ -19,19 +19,19 @@
             <tr>
                 <td>IPs</td>
                 <td>{{ nIPs }}</td>
-                <td>IP</td>
+                <td>{{ ipMost }}</td>
                 <td>{{ nIPMost }}</td>
             </tr>
             <tr>
                 <td>Usuarios</td>
                 <td>{{ nUsuarios }}</td>
-                <td>Usuario</td>
+                <td>{{ usuarioMost }}</td>
                 <td>{{ nUsuarioMost }}</td>
             </tr>
             <tr>
                 <td>Paises</td>
                 <td>{{ nPaises }}</td>
-                <td>Pais</td>
+                <td>{{ paisMost }}</td>
                 <td>{{ nPaisMost }}</td>
             </tr>
         </tbody>
@@ -49,12 +49,9 @@
                 <td>
                     <select id="boxip" class="form-select form-select-sm" aria-label=".form-select-sm example">
                         <option selected>Todo</option>
-                    </select>
-                </td>
-                <td>Attaque ID</td>
-                <td>
-                    <select id="boxid" class="form-select form-select-sm" aria-label=".form-select-sm example">
-                        <option selected>Todo</option>
+                        <option *ngFor="let ip of ips">
+                            {{ ip }}
+                        </option>    
                     </select>
                 </td>
             </tr>
@@ -63,12 +60,18 @@
                 <td>
                     <select id="boxusuario" class="form-select form-select-sm" aria-label=".form-select-sm example">
                         <option selected>Todo</option>
+                        <option *ngFor="let usuario of usuarios">
+                            {{ usuario }}
+                        </option>  
                     </select>
                 </td>
                 <td>Tipo</td>
                 <td>
                     <select id="boxtipo" class="form-select form-select-sm" aria-label=".form-select-sm example">
-                        <option selected>Todo</option>
+                        <option index=0 selected>Todo</option>
+                        <option index=1>DDoS</option>
+                        <option index=2>Bruteforce</option>
+                        <option index=3>Dictionary</option>
                     </select>
                 </td>
             </tr>
@@ -76,7 +79,10 @@
                 <td>Pais</td>
                 <td>
                     <select id="boxpais" class="form-select form-select-sm" aria-label=".form-select-sm example">
-                        <option selected>Todo</option>
+                        <option index=0 selected>Todo</option>
+                        <option *ngFor="let pais of paises">
+                            {{ pais }}
+                        </option>
                     </select>
                 </td>
                 <td colspan="2">

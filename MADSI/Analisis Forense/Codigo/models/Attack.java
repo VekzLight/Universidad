@@ -183,7 +183,6 @@ public class Attack {
     
     @Override
     public String toString() {
-        AttackAnalyzer.getInstance().getDatesBetwen(begin, begin);
         StringBuilder string = new StringBuilder();
         string.append("\n##########################################\n");
         string.append("#AttackId: " + attackId + "\n");

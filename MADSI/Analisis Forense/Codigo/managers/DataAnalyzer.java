@@ -51,13 +51,17 @@ public class DataAnalyzer {
             
             Date _regDate = generateDate(it.getDate());
             String _data[] = analizeDescription(it.getDesciption());
+            String ipLook[] = getIpCountry(_data[0]).split(":");
 
             _regData.setRegDate( _regDate );
             _regData.setSysId( it.getSysId() );
             _regData.setProtocol( it.getProtocol() );
             _regData.setServer( it.getServer() );
 
-            _regData.setCountry( getIpCountry(_data[0]) );
+            _regData.setCountry( ipLook[0] );
+            _regData.setLatitude(ipLook[1]);
+            _regData.setLongitude(ipLook[2]);
+            
             _regData.setIp( _data[0] );
             _regData.setUser( _data[1] );
             _regData.setPort( (_data[2].equalsIgnoreCase("null"))? -1:Integer.parseInt(_data[2])  );
@@ -73,8 +77,19 @@ public class DataAnalyzer {
                 country = ipCountry.get(ip);
             } else{
                 String xmlResponse = getXmlAPI(ip);
+                String latitude = ":Unknown";
+                String longitude = ":Unknown";
+                
                 String xmlCut = xmlResponse.split("countryname")[1];
                 country = xmlCut.substring(1, xmlCut.length() - 2);
+                
+                xmlCut = xmlResponse.split("latitude")[1];
+                country += ":"+xmlCut.substring(1, xmlCut.length() - 2);
+                
+                xmlCut = xmlResponse.split("longitude")[1];
+                country += ":"+xmlCut.substring(1, xmlCut.length() - 2);
+                
+                
                 ipCountry.put(ip, country);
             }
         }
@@ -94,6 +109,7 @@ public class DataAnalyzer {
             while ((response = rd.readLine()) != null) {
                 if(response.matches("^<results>.*"))
                     xmlResponse.append(response);
+                System.out.println(xmlResponse);
             }
             
             rd.close();

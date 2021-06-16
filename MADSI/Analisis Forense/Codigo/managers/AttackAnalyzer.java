@@ -189,10 +189,10 @@ public class AttackAnalyzer {
     public Hashtable<String, Integer> filterRepeatedIPs(int begin, int end){
         Hashtable<String, Integer> _ips = new Hashtable<>();
         end = (end==-1)?registers.size()-1:end;
-        for(int i = begin; i <= end; i++){
+        for(int i = begin; i < end; i++){
             RegisterData _data = registers.get(i);
-            if(!_ips.containsKey(_data.getIp())) _ips.put(_data.getIp(), 1);
-            else _ips.replace(_data.getIp(), (_ips.get(_data.getIp())+1) );
+            if(!_ips.containsKey(_data.getIp()+":"+_data.getLatitude()+":"+_data.getLongitude())) _ips.put(_data.getIp()+":"+_data.getLatitude()+":"+_data.getLongitude(), 1);
+            else _ips.replace(_data.getIp()+":"+_data.getLatitude()+":"+_data.getLongitude(), (_ips.get(_data.getIp()+":"+_data.getLatitude()+":"+_data.getLongitude())+1) );
         }
         return _ips;
     }
@@ -200,7 +200,7 @@ public class AttackAnalyzer {
     public Hashtable<String, Integer> filterRepeatedUsers(int begin, int end){
         Hashtable<String, Integer> __users = new Hashtable<>();
         end = (end==-1)?registers.size()-1:end;
-        for(int i = begin; i <= end; i++){
+        for(int i = begin; i < end; i++){
             RegisterData _data = registers.get(i);
             if(!__users.containsKey(_data.getUser())) __users.put(_data.getUser(), 1);
             else __users.replace(_data.getUser(), (__users.get(_data.getUser())+1) );
@@ -211,7 +211,8 @@ public class AttackAnalyzer {
     public Hashtable<String, Integer> filterRepeatedCountries(int begin, int end){
         Hashtable<String, Integer> _ips = new Hashtable<>();
         end = (end==-1)?registers.size()-1:end;
-        for(int i = begin; i <= end; i++){
+        for(int i = begin; i < end; i++){
+            //System.out.println(i);
             RegisterData _data = registers.get(i);
             if(!_ips.containsKey(_data.getCountry())) _ips.put(_data.getCountry(), 1);
             else _ips.replace(_data.getCountry(), (_ips.get(_data.getCountry())+1) );
