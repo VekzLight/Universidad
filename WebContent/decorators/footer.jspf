@@ -1,0 +1,26 @@
+<table border="0" width="100%">
+  <tr>
+    <td rowspan="3" width="175" height="21"></td>
+
+    <td align="center" width="625" height="5"><img
+        src="<%=request.getContextPath()%>/img/bar.png"
+        height="5" width="625"></td>
+  </tr>
+
+  <tr>
+    <td align="center" class="toolbar">
+      <a href="http://www.instructores.azc.uam.mx">Principal</a>
+      | <a HREF="http://www.instructores.azc.uam.mx/mision.html">Misión</a>
+      | <a HREF="http://www.instructores.azc.uam.mx/vision.html">Visión</a>
+      | <a HREF="http://www.instructores.azc.uam.mx/casosexito.html">Casos de exito</a>
+      | <a HREF="http://www.instructores.azc.uam.mx/contacto.html">Contactanos</a>
+    </td>
+  </tr>
+
+  <tr>
+    <td class="legal">
+      <br>Copyright (c) HPL 2017
+      <br>Derechos Reservados
+    </td>
+  </tr>
+</table>

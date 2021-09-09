@@ -1,0 +1,13 @@
+body { background-color:#FFFFFF; font-family:Helvetica,sans-serif; }
+:link { color:#400040; }
+:vlink { color:#400040; }
+:alink { color:#ffff00; }
+.important { font-weight:bold; color:red; display:inline; font-size:smaller; }
+.section { font-weight:bold; color:#00ff00; margin:10 10 5 5; }
+.step { font-weight:bold; color:#800000; margin:5; }
+.instructions { font-size:smaller; }
+.instructionlist { text-align:left; }
+.form { background-color:#00ff00; }
+.label { font-size:smaller; font-weight:bold; color:white; margin:5 5 5 5;}
+.item { font-weight:bold; margin:0 5 30 5; text-align:left; }
+.smallitem { font-size:smaller; }
